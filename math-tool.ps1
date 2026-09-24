@@ -34,14 +34,14 @@ function Get-Fibonacci {
 
 function Get-Factorial {
     [CmdletBinding()]
-    [OutputType([long])]
+    [OutputType([System.Numerics.BigInteger])]
     param(
         [Parameter(Mandatory)]
         [ValidateRange(0, [int]::MaxValue)]
         [int] $N
     )
 
-    [long] $result = 1
+    [System.Numerics.BigInteger] $result = [System.Numerics.BigInteger]::One
     for ($i = 2; $i -le $N; $i++) {
         $result = $result * $i
     }

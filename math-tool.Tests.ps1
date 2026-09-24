@@ -81,6 +81,7 @@ Describe 'Get-Factorial' {
         @{ N = 0; Expected = 1 }
         @{ N = 1; Expected = 1 }
         @{ N = 5; Expected = 120 }
+        @{ N = 21; Expected = [System.Numerics.BigInteger]::Parse('51090942171709440000') }
     ) {
         Get-Factorial -N $N | Should -Be $Expected
     }
@@ -92,7 +93,7 @@ Describe 'Get-Factorial' {
     ) {
         $output = @(Get-Factorial -N $N)
         $output.Count | Should -Be 1
-        $output[0] | Should -BeOfType [long]
+        $output[0] | Should -BeOfType [System.Numerics.BigInteger]
     }
 }
 
@@ -101,6 +102,7 @@ Describe 'math-tool.ps1 factorial CLI execution' {
         @{ N = 0; Expected = 'Factorial(0) = 1' }
         @{ N = 1; Expected = 'Factorial(1) = 1' }
         @{ N = 5; Expected = 'Factorial(5) = 120' }
+        @{ N = 21; Expected = 'Factorial(21) = 51090942171709440000' }
     ) {
         $result = Invoke-MathToolCli -N $N -Operation 'factorial'
         $result.ExitCode | Should -Be 0
